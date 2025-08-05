@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: api-build
+    working_dir: /app/api
+    command: npm run dev
+    volumes:
+      - ./api:/app/api
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=development
+
+  ui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: ui-build
+    working_dir: /app/ui
+    command: npm run dev
+    volumes:
+      - ./ui:/app/ui
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=development
